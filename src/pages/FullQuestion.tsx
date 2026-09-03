@@ -2,6 +2,8 @@ import React from 'react'
 import Header from '../components/Header'
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+
 import axios from 'axios'
 
 const FullQuestion: React.FC = () => {
@@ -14,10 +16,12 @@ const FullQuestion: React.FC = () => {
     title: string
     score: number
     url: string
+    kids: string
   }>()
   
   const {id} = useParams()
   const navigate = useNavigate()
+  const kidsCount = question?.kids.length;
 
   useEffect(() => {
     async function fetchQuestion(){
@@ -36,6 +40,8 @@ const FullQuestion: React.FC = () => {
     }
   }, [id, navigate])
 
+
+
   if(!question){
     return (
       <>
@@ -51,6 +57,9 @@ const FullQuestion: React.FC = () => {
 
     <div className='container'>
       <div className='content'>
+          <Link to={'/'}>
+            <button className='btn-refresh'>На главную</button>
+          </Link>
         <div className='description'>
            <div className='question'>
                 <h3>{question.title}</h3>
@@ -61,6 +70,7 @@ const FullQuestion: React.FC = () => {
               </div>
               <div className='desc'>
                 <p className='author'>{(question.by).toUpperCase()}</p>
+                <p>comments: {kidsCount}</p>
                 <span>score: {question.score}🌟</span>
                 <p>{new Date(question.time * 1000).toLocaleDateString()}</p>
               </div>

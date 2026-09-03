@@ -54,9 +54,6 @@ const QuestionList: React.FC = () => {
     <div className='container'>
       <div className='parrent'>
         <div className='back'>
-          <Link to={'/'}>
-            <button className='btn-refresh'>На главную</button>
-          </Link>
         </div>
         <div className='refresh'>
           <button className='btn-refresh' onClick={fetchData}>Обновить</button>
